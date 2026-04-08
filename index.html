@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Consumer App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>API Consumer App</h1>
+        </header>
+        <section class="controls">
+            <div class="control-group">
+                <select id="apiSelector" class="selector">
+                    <option value="fetch">Utiliza Fetch</option>
+                    <option value="axios">Utiliza Axios</option>
+                </select>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Ingresa tu término de búsqueda..."
+                >
+                <button id="fetchButton" class="btn-fetch">Obtener Datos</button>
+            </div>
+        </section>
+        <main class="main-content">
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Cargando datos...</p>
+            </div>
+            <div id="error" class="error hidden">
+                <p id="errorMessage"></p>
+            </div>
+            <section id="results" class="results hidden">
+                <h2>Resultados</h2>
+                <div id="resultsContainer" class="results-grid">
+                </div>
+            </section>
+            <section id="pagination" class="pagination hidden">
+                <button id="prevButton" class="pagination-btn">← Anterior</button>
+                <div class="pagination-buttons"></div>
+                <button id="nextButton" class="pagination-btn">Siguiente →</button>
+            </section>
+        </main>
+    </div>
+    <!-- Axios Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
