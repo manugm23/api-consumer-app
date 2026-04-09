@@ -1,7 +1,3 @@
-/* =====================================================
-   ESTILOS GLOBALES
-   ===================================================== */
-
 * {
     margin: 0;
     padding: 0;
@@ -16,10 +12,6 @@ body {
     padding: 20px;
 }
 
-/* =====================================================
-   CONTENEDOR PRINCIPAL
-   ===================================================== */
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -28,10 +20,6 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
-
-/* =====================================================
-   CABECERA
-   ===================================================== */
 
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -44,10 +32,6 @@ body {
     font-size: 2.5rem;
     font-weight: bold;
 }
-
-/* =====================================================
-   SECCIÓN DE CONTROLES
-   ===================================================== */
 
 .controls {
     background: #f8f9fa;
@@ -122,18 +106,10 @@ body {
     cursor: not-allowed;
 }
 
-/* =====================================================
-   CONTENIDO PRINCIPAL
-   ===================================================== */
-
 .main-content {
     padding: 40px 20px;
     min-height: 400px;
 }
-
-/* =====================================================
-   INDICADOR DE CARGA
-   ===================================================== */
 
 .loading {
     display: flex;
@@ -163,10 +139,6 @@ body {
     color: #666;
 }
 
-/* =====================================================
-   ELEMENTO DE ERROR
-   ===================================================== */
-
 .error {
     background: #f8d7da;
     border: 1px solid #f5c6cb;
@@ -181,10 +153,6 @@ body {
     margin: 0;
     font-weight: 500;
 }
-
-/* =====================================================
-   SECCIÓN DE RESULTADOS
-   ===================================================== */
 
 .results {
     margin-bottom: 30px;
@@ -201,10 +169,6 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
-
-/* =====================================================
-   TARJETAS DE DATOS
-   ===================================================== */
 
 .card {
     background: #f8f9fa;
@@ -238,16 +202,12 @@ body {
     font-size: 0.9rem;
 }
 
-/* =====================================================
-   SECCIÓN DE PAGINACIÓN
-   ===================================================== */
-
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 20px;
+    gap: 6px;
+    padding: 16px 0;
     background: #f8f9fa;
     border-top: 1px solid #e9ecef;
     border-radius: 5px;
@@ -256,7 +216,7 @@ body {
 
 .pagination-buttons {
     display: flex;
-    gap: 5px;
+    gap: 6px;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -269,7 +229,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: all 0.2s;
     min-width: 80px;
 }
 
@@ -286,19 +246,12 @@ body {
 
 .pagination-btn.active {
     background: #27ae60;
+    font-weight: 600;
 }
-
-/* =====================================================
-   UTILIDADES
-   ===================================================== */
 
 .hidden {
     display: none !important;
 }
-
-/* =====================================================
-   RESPONSIVE
-   ===================================================== */
 
 @media (max-width: 768px) {
     .header h1 {

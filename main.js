@@ -72,24 +72,22 @@ function hidePagination() {
 
 //FUNCIONS PRINCIPALS
 
+let lastSearchTerm = '';
+
 async function fetchData() {
     const searchTerm = searchInput.value.trim();
     const useAxios = apiSelector.value === 'axios';
 
     // Validar que hi ha un terme de cerca
     if (!searchTerm) {
-        showError('Por favor ingresa un término de búsqueda.');
+        showError('Si us plau ingressa un terme de cerca.');
         return;
     }
 
-    showLoading();
-    hideError();
-    hideResults();
-    hidePagination();
-    resultsContainer.innerHTML = '';
-    currentPage = 1;
-    allResults = [];
-    totalItems = 0;
+     if (searchTerm !== lastSearchTerm) {
+        currentPage = 1;
+    }
+    lastSearchTerm = searchTerm;
 
     try {
         if (useAxios) {
@@ -98,14 +96,14 @@ async function fetchData() {
             await fetchDataWithFetch(searchTerm);
         }
 
-        // Si tenemos resultados, mostrarlos
+        //Si tenim resultats, mostrar-los
         if (allResults.length > 0) {
             displayResults(allResults, totalItems);
         } else {
             showError('No es van trobar resultats per a la teva cerca.');
         }
     } catch (error) {
-        showError('Error inesperado: ' + error.message);
+        showError('Error inesperat: ' + error.message);
         console.error('Error:', error);
     } finally {
         hideLoading();
@@ -150,35 +148,34 @@ async function fetchDataWithAxios(searchTerm) {
         if (error.response) {
             throw new Error(`Error HTTP: ${error.response.status} - ${error.response.statusText}`);
         } else if (error.request) {
-            throw new Error('No se recibió respuesta del servidor');
+            throw new Error('No es va rebre resposta del servidor');
         } else {
             throw new Error(error.message);
         }
     }
 }
 
-/**
- * Muestra los resultados y configura la paginación
- * @param {array} items - Array de items a mostrar
- * @param {number} totalItems - Total de items
- */
 function displayResults(items, totalItems) {
-    // Limpiar contenedor
+    //Netejar contenidor
     resultsContainer.innerHTML = '';
 
-    // Si no hay resultados
+    //Si no hi ha resultats
     if (items.length === 0) {
-        resultsContainer.innerHTML = '<p>No se han encontrado resultados</p>';
+        resultsContainer.innerHTML = `
+        <p>
+            No s'han trobat resultats.
+        </p>
+        `;
         return;
     }
 
-    // Crear tarjetas para cada resultado
+    //Crear targetes per a cada resultat
     items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
 
-        const title = item.title || 'Sin título';
-        const body = item.body || 'Sin descripción';
+        const title = item.title || 'Sense títol';
+        const body = item.body || 'Sense descripció';
         const id = item.id || 'N/A';
 
         card.innerHTML = `
@@ -190,22 +187,17 @@ function displayResults(items, totalItems) {
         resultsContainer.appendChild(card);
     });
 
-    // Configurar paginación
+    //Configurar paginació
     setupPagination(totalItems);
 
-    // Mostrar resultados
+    //Mostrar resultats
     showResults();
 }
 
-/**
- * Configura los botones de paginación
- * @param {number} totalItems - Total de items
- */
+//Configura els botons de paginació
 function setupPagination(totalItems) {
-    // Limpiar contenedor de paginación
     const paginationContainer = document.querySelector('.pagination');
     if (paginationContainer) {
-        // Crear contenedor para botones si no existe
         let buttonsContainer = paginationContainer.querySelector('.pagination-buttons');
         if (!buttonsContainer) {
             buttonsContainer = document.createElement('div');
@@ -215,24 +207,23 @@ function setupPagination(totalItems) {
         buttonsContainer.innerHTML = '';
 
         const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-        // Crear botones para cada página
         for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
             button.className = 'pagination-btn';
             button.dataset.page = i;
 
-            // Deshabilitar botón de página actual
             if (i === currentPage) {
                 button.disabled = true;
                 button.classList.add('active');
             }
 
-            // Event listener para cambio de página
             button.addEventListener('click', () => {
                 currentPage = i;
-                fetchData(); // Recargar datos para la nueva página
+                if (!searchInput.value.trim()) {
+                    searchInput.value = lastSearchTerm;
+    }
+                fetchData(); 
             });
 
             buttonsContainer.appendChild(button);
@@ -242,38 +233,30 @@ function setupPagination(totalItems) {
     }
 }
 
-/**
- * Navega a la página anterior
- */
 function goToPreviousPage() {
     if (currentPage > 1) {
         currentPage--;
+        if (!searchInput.value.trim()) {
+            searchInput.value = lastSearchTerm;
+        }
         fetchData();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-/**
- * Navega a la página siguiente
- */
 function goToNextPage() {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     if (currentPage < totalPages) {
         currentPage++;
+        if (!searchInput.value.trim()) {
+            searchInput.value = lastSearchTerm;
+        }
         fetchData();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-/* =====================================================
-   FUNCIONES UTILITARIAS
-   ===================================================== */
-
-/**
- * Escapa caracteres especiales HTML para evitar XSS
- * @param {string} text - Texto a escapar
- * @returns {string} Texto escapado
- */
+// FUNCIONS UTILITÀRIES
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',
@@ -285,10 +268,7 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-/* =====================================================
-   INICIALIZACIÓN
-   ===================================================== */
-
-console.log('✅ API Consumer App Inicializada');
+// INICIALITZACIÓ
+console.log('✅ API Consumer App Inicialitzada');
 console.log('📚 API URL:', API_URL);
-console.log('🔄 Items por página:', itemsPerPage);
+console.log('🔄 Items per pàgina:', itemsPerPage);
