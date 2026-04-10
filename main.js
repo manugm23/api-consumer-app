@@ -4,8 +4,6 @@ const itemsPerPage = 10;
 let allResults = [];
 let totalItems = 0;
 
-//Referències als elements del DOM
-
 const apiSelector = document.getElementById('apiSelector');
 const searchInput = document.getElementById('searchInput');
 const fetchButton = document.getElementById('fetchButton');
@@ -19,8 +17,6 @@ const prevButton = document.getElementById('prevButton');
 const nextButton = document.getElementById('nextButton');
 const currentPageSpan = document.getElementById('currentPage');
 
-//Event listener
-
 fetchButton.addEventListener('click', fetchData);
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -31,8 +27,6 @@ searchInput.addEventListener('keypress', (e) => {
 prevButton.addEventListener('click', goToPreviousPage);
 nextButton.addEventListener('click', goToNextPage);
 
-// FUNCIONS DE CONTROL DE UI
-
 function showLoading() {
     loadingElement.classList.remove('hidden');
 }
@@ -40,8 +34,6 @@ function showLoading() {
 function hideLoading() {
     loadingElement.classList.add('hidden');
 }
-
-//Per mostrar missatges d'error
 
 function showError(message) {
     errorMessage.textContent = message;
@@ -70,15 +62,12 @@ function hidePagination() {
     paginationSection.classList.add('hidden');
 }
 
-//FUNCIONS PRINCIPALS
-
 let lastSearchTerm = '';
 
 async function fetchData() {
     const searchTerm = searchInput.value.trim();
     const useAxios = apiSelector.value === 'axios';
 
-    // Validar que hi ha un terme de cerca
     if (!searchTerm) {
         showError('Si us plau ingressa un terme de cerca.');
         return;
@@ -96,7 +85,6 @@ async function fetchData() {
             await fetchDataWithFetch(searchTerm);
         }
 
-        //Si tenim resultats, mostrar-los
         if (allResults.length > 0) {
             displayResults(allResults, totalItems);
         } else {
@@ -156,10 +144,8 @@ async function fetchDataWithAxios(searchTerm) {
 }
 
 function displayResults(items, totalItems) {
-    //Netejar contenidor
     resultsContainer.innerHTML = '';
 
-    //Si no hi ha resultats
     if (items.length === 0) {
         resultsContainer.innerHTML = `
         <p>
@@ -169,7 +155,6 @@ function displayResults(items, totalItems) {
         return;
     }
 
-    //Crear targetes per a cada resultat
     items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -187,14 +172,10 @@ function displayResults(items, totalItems) {
         resultsContainer.appendChild(card);
     });
 
-    //Configurar paginació
     setupPagination(totalItems);
-
-    //Mostrar resultats
     showResults();
 }
 
-//Configura els botons de paginació
 function setupPagination(totalItems) {
     const paginationContainer = document.querySelector('.pagination');
     if (paginationContainer) {
@@ -256,7 +237,6 @@ function goToNextPage() {
     }
 }
 
-// FUNCIONS UTILITÀRIES
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',
@@ -268,7 +248,6 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-// INICIALITZACIÓ
 console.log('✅ API Consumer App Inicialitzada');
 console.log('📚 API URL:', API_URL);
 console.log('🔄 Items per pàgina:', itemsPerPage);

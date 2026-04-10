@@ -1,0 +1,15 @@
+{
+  "name": "api-consumer-app",
+  "version": "1.0.0",
+  "description": "Aplicación web para consumir APIs",
+  "main": "main.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitest": "^1.6.1"
+  }
+}
