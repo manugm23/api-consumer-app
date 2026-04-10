@@ -19,23 +19,11 @@ Esta es una aplicación web sencilla que consume datos de una API externa. Permi
 5. Los resultados se muestran en una cuadrícula de tarjetas, cada una con el título, cuerpo y ID del post.
 6. Si hay más resultados, aparece la paginación para navegar entre páginas.
 
-## Para qué sirve
-Esta aplicación sirve como ejemplo práctico de cómo consumir APIs en el frontend. Es útil para:
-- Aprender a usar Fetch API y Axios.
-- Entender el manejo de promesas y async/await.
-- Practicar el diseño de interfaces responsivas.
-- Demostrar el consumo de APIs REST con paginación y búsqueda.
-
 ## Tecnologías utilizadas
 - HTML5
 - CSS3
 - JavaScript (ES6+)
 - Axios (desde CDN)
-
-## Cómo ejecutar
-1. Abre el archivo `index.html` en un navegador web.
-2. Asegúrate de tener conexión a internet para acceder a la API.
-3. Selecciona el método de petición, ingresa un término de búsqueda y haz clic en "Obtener Datos".
 
 ## Tests
 El proyecto incluye tests unitarios para algunas funciones utilizando Vitest.
@@ -45,7 +33,3 @@ El proyecto incluye tests unitarios para algunas funciones utilizando Vitest.
 ## Notas
 - La API utilizada es JSONPlaceholder, que proporciona datos de prueba.
 - La aplicación maneja errores de red y respuestas HTTP no exitosas.
-- El diseño es responsivo y funciona en dispositivos móviles.
-- La API utilizada es JSONPlaceholder, que proporciona datos de prueba.
-- La aplicación maneja errores de red y respuestas HTTP no exitosas.
-- El diseño es responsivo y funciona en dispositivos móviles.
